@@ -1,0 +1,14 @@
+
+# Log file
+*.log
+logs/
+
+# Maven
+target/
+
+# Intellij
+*.iml
+*.iws
+*.idea/
+
+
