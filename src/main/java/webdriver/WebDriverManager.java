@@ -1,8 +1,8 @@
-/**
- * Класс для работы с вэбдрайвером
- * Автор Васильев И.Н. atcc@mail.ru
- * 02.12.2018
+/*
+ * Web-driver manager class
+ * Parfimovich A.V.
  */
+
 package webdriver;
 
 import org.apache.logging.log4j.Logger;
@@ -15,13 +15,22 @@ import org.openqa.selenium.remote.UnreachableBrowserException;
 import java.util.concurrent.TimeUnit;
 
 public class WebDriverManager {
+    private static final String BROWSER = java.lang.System.getProperties().getProperty("webbrowser");
     private static final Logger log = LogManager.getLogger(WebDriverManager.class);
     public static WebDriver driver;
 
-    private WebDriverManager() {}
+    private WebDriverManager() {
+        //browser = java.lang.System.getProperties().getProperty("webbrowser");
+        //log.info("первоначальная инициализация класса WebDriverManager");
+        //log.debug("запуск тестов для браузере {}",BROWSER);
+    }
 
     public static WebDriver getDriver() {
         if (driver == null) {
+
+            log.info("первоначальная инициализация класса WebDriverManager");
+            log.debug("запуск тестов для браузере {}",BROWSER);
+
             System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
             try {
                 ChromeOptions option = new ChromeOptions();

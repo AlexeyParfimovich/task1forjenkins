@@ -15,6 +15,9 @@
         <compiler.version>1.8</compiler.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
+        <selenium.test.webbrowser>chrome</selenium.test.webbrowser>
+        <selenium.test.jvmargs><![CDATA[-Dwebbrowser=${selenium.test.webbrowser}]]></selenium.test.jvmargs>
     </properties>
 
     <dependencies>
@@ -89,6 +92,7 @@
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                         -Dcucumber.plugin="io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"
+<!--                        -Dwebaddress:"${selenium.test.jvmargs}"-->
                     </argLine>
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
