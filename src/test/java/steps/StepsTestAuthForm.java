@@ -23,7 +23,7 @@ public class StepsTestAuthForm {
     private final Logger log = LogManager.getLogger(getClass());
 
     protected PageAuthForm page = new PageAuthForm();
-    protected final WebDriverWait waiter = new WebDriverWait(WebDriverManager.getDriver(), 5);
+    protected WebDriverWait waiter = WebDriverManager.getWaiter();
 
 //    @Attachment(value = "{0}", type = "image/png", fileExtension = "png.")
     public void addScreenshot(String title) {

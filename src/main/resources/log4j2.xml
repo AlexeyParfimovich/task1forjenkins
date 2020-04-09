@@ -1,75 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">  <!-- Задание уровня детализации внутренних сообщений Log4j-->
+<Configuration status="WARN">
 
-    <!-- Полная информация по Log4l2 доступна по адресу http://logging.apache.org/log4j/2.x/manual/index.html  -->
-
-    <!-- Аппендеры - это объекты которые реализуют вывод данных в Консоль/Файл/БД/Socket/Telnet -->
     <Appenders>
-        <!-- Аппендер для вывода в консоль SYSTEM_OUT или SYSTEM_ERR-->
         <Console name="Console" target="SYSTEM_OUT">
-            <!-- Задание шаблона вывода собщения на экран-->
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{10} - %msg%n"/>
         </Console>
-        <!-- Аппендер для вывода в файл-->
+
         <RollingFile name="TestLogFile"
-                     fileName="logs/tests.log"
+                     fileName="logs/testing.log"
                      filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
             <PatternLayout>
                 <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
             </PatternLayout>
             <Policies>
                 <TimeBasedTriggeringPolicy interval = "1" />
-                <SizeBasedTriggeringPolicy size="100 MB" />
+                <SizeBasedTriggeringPolicy size="10 MB" />
             </Policies>
         </RollingFile>
 
-<!--        <RollingFile name="TestLogFile"-->
-<!--                     fileName="logs/test.log"-->
-<!--                     filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">-->
-<!--            <PatternLayout>-->
-<!--                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>-->
-<!--            </PatternLayout>-->
-<!--            <Policies>-->
-<!--                <TimeBasedTriggeringPolicy interval = "1" />-->
-<!--                <SizeBasedTriggeringPolicy size="1 MB" />-->
-<!--            </Policies>-->
-<!--        </RollingFile>-->
-
-        <!-- Аппендер для Асинхронного вывода в указанный аппендер(файл) в многопоточной среде
-             Используя промежуточный буфер для накопления событий логирования, он позволяет организовать
-             асинхронную работу с файловой системой.
-             Порождаясь, события логирования накапливаются, и лишь при достижении определенного уровня
-             заполненности буфера — записываются в файл.
-        -->
 <!--        <Async name="async_appender">-->
 <!--            <AppenderRef ref="TestLogFile" />-->
 <!--            <AppenderRef ref="CalcLogFile" />-->
 <!--        </Async>-->
 
-
     </Appenders>
 
-    <!-- Логгеры - объекты класса Logger которые используются для вывода данных
-    и управления уровнем детализации вывода (TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF)  -->
+
     <Loggers>
-        <!-- Root - безымянный стандартный логгер, который будет получать все сообщения от приложение -->
         <Root level="TRACE"> <!-- задание уровня детализации вывода -->
         <AppenderRef ref="Console"/>  <!-- Ссылка на Аппендер, в который будуи выводиться сообщения Логгера-->
         <AppenderRef ref="TestLogFile"/>
-        <!--AppenderRef ref="CalcLogFile"/-->
     </Root>
-
-        <!-- Логгеры для конкретных классов, которые будет получать только сообщения, генерируемые в соответсвующем классе -->
-<!--        <Logger name= "org.example.FibCalc" level="TRACE" additivity="false">-->
-<!--            <AppenderRef ref="Console"/>-->
-<!--            <AppenderRef ref="CalcLogFiler"/>-->
-<!--        </Logger>-->
-
 <!--        <Logger name= "org.example.TestFib" level="TRACE" additivity="false">-->
 <!--            <AppenderRef ref="Console"/>-->
 <!--            <AppenderRef ref= "TestLogFile"/> &lt;!&ndash;"async_appender"&ndash;&gt;-->
 <!--        </Logger>-->
-
     </Loggers>
 
 </Configuration>
