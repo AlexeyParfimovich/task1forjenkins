@@ -1,6 +1,6 @@
 package steps;
 
-import pages.PageAuthForm;
+import pages.TestPageAuthForm;
 import io.qameta.allure.Allure;
 import io.cucumber.java.ru.*;
 
@@ -12,7 +12,6 @@ import org.apache.logging.log4j.LogManager;
 
 import org.testng.Assert;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
@@ -20,7 +19,7 @@ import java.io.IOException;
 
 public class StepsTestAuthForm {
     private final Logger log = LogManager.getLogger(getClass());
-    private PageAuthForm page = new PageAuthForm();
+    private TestPageAuthForm page = new TestPageAuthForm();
     private WebDriverWait waiter = WebDriverManager.getWaiter();
 
 //    @Attachment(value = "{0}", type = "image/png", fileExtension = "png.")

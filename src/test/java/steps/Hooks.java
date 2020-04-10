@@ -13,12 +13,13 @@ public class Hooks {
 
     @Before
     public void beforeScenario(Scenario scenario) {
-        log.info("Запуск сценария " + scenario.getName());
+        log.info("Запуск сценария {}", scenario.getName());
     }
 
     @After
     public void afterScenario(Scenario scenario) {
-        log.info("Завершено выполнение сценария " + scenario.getName());
+        log.info("Cценарий {} завершен", scenario.getName());
         WebDriverManager.quit();
+
     }
 }
