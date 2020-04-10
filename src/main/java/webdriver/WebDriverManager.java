@@ -47,7 +47,6 @@ public class WebDriverManager {
     private static void initChromeDriver() throws UnreachableBrowserException {
         System.setProperty("webdriver.chrome.driver",
                 System.getProperty("chrome.driver.path","chromedriver.exe"));
-
         ChromeOptions option = new ChromeOptions();
         option.addArguments("--window-size=1360,768");
         //option.addArguments("-start-maximized");//+ System.getProperty("window-size","1920,1080"));
@@ -60,7 +59,6 @@ public class WebDriverManager {
     private static void initGeckoDriver() throws UnreachableBrowserException {
         System.setProperty("webdriver.gecko.driver",
                 System.getProperty("gecko.driver.path","geckodriver.exe"));
-
         FirefoxOptions option = new FirefoxOptions();
         option.addArguments("--window-size=1360,768");
         driver = new FirefoxDriver(option);
@@ -73,7 +71,6 @@ public class WebDriverManager {
     private static void initOperaDriver() throws UnreachableBrowserException {
         System.setProperty("webdriver.opera.driver",
                     System.getProperty("opera.driver.path","operadriver.exe"));
-
         OperaOptions option = new OperaOptions();
         option.addArguments("--window-size=1360,768");
         driver = new OperaDriver(option);
@@ -86,7 +83,6 @@ public class WebDriverManager {
     private static void initIEDriver() throws UnreachableBrowserException {
         System.setProperty("webdriver.ie.driver",
                 System.getProperty("ie.driver.path","IEDriverServer.exe"));
-
         InternetExplorerOptions option = new InternetExplorerOptions();
         option.addCommandSwitches("--window-size=1360,768");
         driver = new InternetExplorerDriver(option);
