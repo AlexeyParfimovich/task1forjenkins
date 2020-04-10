@@ -143,12 +143,14 @@ public class WebDriverManager {
      *
      */
     public static void quit() {
-        try {
+        if (driver == null) {
+            log.debug("Ошибка закрытия драйвера: драйвер не был инициализирован!");
+        } else try {
             driver.quit();
             driver = null;
             waiter = null;
         } catch (UnreachableBrowserException e) {
-            log.error("Невозможно закрыть браузер!");
+            log.error("Ошибка закрытия драйвера: {}", e.getMessage());
         }
     }
 }

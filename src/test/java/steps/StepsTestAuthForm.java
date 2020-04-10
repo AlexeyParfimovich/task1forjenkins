@@ -2,28 +2,26 @@ package steps;
 
 import pages.PageAuthForm;
 import io.qameta.allure.Allure;
+import io.cucumber.java.ru.*;
+
 import webdriver.WebDriverManager;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-import io.cucumber.java.ru.*;
-
 import org.testng.Assert;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 import java.io.IOException;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
-
 public class StepsTestAuthForm {
     private final Logger log = LogManager.getLogger(getClass());
-
-    protected PageAuthForm page = new PageAuthForm();
-    protected WebDriverWait waiter = WebDriverManager.getWaiter();
+    private PageAuthForm page = new PageAuthForm();
+    private WebDriverWait waiter = WebDriverManager.getWaiter();
 
 //    @Attachment(value = "{0}", type = "image/png", fileExtension = "png.")
     public void addScreenshot(String title) {
@@ -163,16 +161,10 @@ public class StepsTestAuthForm {
         try {
             waiter.until(elementToBeClickable(page.userAccountExitButton));
             page.userAccountExitButton.click();
+            page.browserAlertAccept();
         } catch  (TimeoutException e) {
             Assert.fail("Кнопка выхода из учетной записи не доступна для нажатия" + e.getMessage());
         }
-
-        try {
-            WebDriverManager.getDriver().switchTo().alert().accept();
-        } catch (NoAlertPresentException e) {
-            log.error("No expected Alert present!",e);
-        }
-
         addScreenshot("Подтверждение выхода из учетной записи");
     }
 }
