@@ -53,6 +53,7 @@ public class WebDriverManager {
             option.addArguments("--disable-gpu");
             option.addArguments("--disable-extensions");
             option.addArguments("--disable-dev-shm-usage");
+            option.addArguments("--remote-debugging-port=9222");
 
             log.debug("Выбран драйвер браузера {} для {}",browser,platform);
         } else {
