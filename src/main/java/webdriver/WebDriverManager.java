@@ -33,40 +33,54 @@ public class WebDriverManager {
 
     private static final String FIREFOX_browser = "firefox";
     private static final String CHROME_browser = "chrome";
-    private static final String IE11_browser = "ie";
+    private static final String OPERA_browser = "opera";
     private static final String browser;
     private static final String platform;
     static {
         browser = System.getProperties().getProperty("webbrowser",CHROME_browser);
-        platform = System.getProperties().getProperty("testplatform",CHROME_browser);
+        platform = System.getProperties().getProperty("testplatform",WINDOWS_platform);
     }
 
     /**
      *
      */
     private static void initChromeDriver() throws UnreachableBrowserException {
-//        ChromeOptions option = new ChromeOptions();
+        ChromeOptions option = new ChromeOptions();
 
         if (platform.equals(LINUX_platform)) {
-//            System.setProperty("webdriver.chrome.driver", System.getProperty("chrome.linux.path"));
-
-            OperaOptions option = new OperaOptions();
-            System.setProperty("webdriver.opera.driver", System.getProperty("opera.linux.path"));
-            option.addArguments("--headless");
-            option.addArguments("--no-sandbox");
-            option.addArguments("--disable-gpu");
-            option.addArguments("--disable-extensions");
-            option.addArguments("--disable-dev-shm-usage");
-            option.addArguments("--remote-debugging-port=9222");
-
+            System.setProperty("webdriver.chrome.driver", System.getProperty("chrome.linux.path"));
+//            option.addArguments("--headless");
+//            option.addArguments("--no-sandbox");
+//            option.addArguments("--disable-gpu");
+//            option.addArguments("--disable-extensions");
+//            option.addArguments("--disable-dev-shm-usage");
+//            option.addArguments("--remote-debugging-port=9222");
             log.debug("Выбран драйвер браузера {} для {}",browser,platform);
         } else {
-            ChromeOptions option = new ChromeOptions();
             System.setProperty("webdriver.chrome.driver", System.getProperty("chrome.windows.path"));
+            log.debug("Выбран драйвер браузера {} для {}",browser,platform);
+        }
+        driver = new ChromeDriver();
+        log.trace("Драйвер создан");
+    }
 
-            option.addArguments("--headless");
-            option.addArguments("--no-sandbox");
+    /**
+     *
+     */
+    private static void initOperaDriver() throws UnreachableBrowserException {
+        OperaOptions option = new OperaOptions();
 
+        if (platform.equals(LINUX_platform)) {
+            System.setProperty("webdriver.opera.driver", System.getProperty("opera.linux.path"));
+//            option.addArguments("--headless");
+//            option.addArguments("--no-sandbox");
+//            option.addArguments("--disable-gpu");
+//            option.addArguments("--disable-extensions");
+//            option.addArguments("--disable-dev-shm-usage");
+//            option.addArguments("--remote-debugging-port=9222");
+            log.debug("Выбран драйвер браузера {} для {}",browser,platform);
+        } else {
+            System.setProperty("webdriver.opera.driver", System.getProperty("opera.windows.path"));
             log.debug("Выбран драйвер браузера {} для {}",browser,platform);
         }
         driver = new OperaDriver();
@@ -77,8 +91,17 @@ public class WebDriverManager {
      *
      */
     private static void initGeckoDriver() throws UnreachableBrowserException {
-        System.setProperty("webdriver.gecko.driver", System.getProperty("gecko.windows.path"));
+        FirefoxOptions option = new FirefoxOptions();
+
+        if (platform.equals(LINUX_platform)) {
+            System.setProperty("webdriver.gecko.driver", System.getProperty("gecko.linux.path"));
+            log.debug("Выбран драйвер браузера {} для {}", browser, platform);
+        } else {
+            System.setProperty("webdriver.gecko.driver", System.getProperty("gecko.windows.path"));
+            log.debug("Выбран драйвер браузера {} для {}",browser,platform);
+        }
         driver = new FirefoxDriver();
+        log.trace("Драйвер создан");
     }
 
 
@@ -91,6 +114,7 @@ public class WebDriverManager {
             try {
                 switch (browser) {
                     case FIREFOX_browser: initGeckoDriver(); break;
+                    case OPERA_browser: initOperaDriver(); break;
                     case CHROME_browser:
                     default: initChromeDriver();
                 }
