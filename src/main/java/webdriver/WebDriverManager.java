@@ -12,6 +12,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -68,7 +69,7 @@ public class WebDriverManager {
 
             log.debug("Выбран драйвер браузера {} для {}",browser,platform);
         }
-        driver = new ChromeDriver();
+        driver = new OperaDriver();
         log.trace("Драйвер создан");
     }
 
