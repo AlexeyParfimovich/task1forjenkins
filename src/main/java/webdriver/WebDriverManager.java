@@ -12,6 +12,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -43,11 +44,13 @@ public class WebDriverManager {
      *
      */
     private static void initChromeDriver() throws UnreachableBrowserException {
-        ChromeOptions option = new ChromeOptions();
+//        ChromeOptions option = new ChromeOptions();
 
         if (platform.equals(LINUX_platform)) {
-            System.setProperty("webdriver.chrome.driver", System.getProperty("chrome.linux.path"));
+//            System.setProperty("webdriver.chrome.driver", System.getProperty("chrome.linux.path"));
 
+            OperaOptions option = new OperaOptions();
+            System.setProperty("webdriver.opera.driver", System.getProperty("opera.linux.path"));
             option.addArguments("--headless");
             option.addArguments("--no-sandbox");
             option.addArguments("--disable-gpu");
@@ -57,6 +60,7 @@ public class WebDriverManager {
 
             log.debug("Выбран драйвер браузера {} для {}",browser,platform);
         } else {
+            ChromeOptions option = new ChromeOptions();
             System.setProperty("webdriver.chrome.driver", System.getProperty("chrome.windows.path"));
 
             option.addArguments("--headless");
