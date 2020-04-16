@@ -12,8 +12,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -52,29 +50,21 @@ public class WebDriverManager {
             System.setProperty("webdriver.chrome.driver", System.getProperty("chrome.windows.path"));
             log.debug("Выбран драйвер браузера {} для {}",browser,platform);
         }
-        //System.setProperty("webdriver.chrome.driver", System.getProperty("chrome.driver.path"));
         ChromeOptions option = new ChromeOptions();
         option.addArguments("--headless");
         option.addArguments("--no-sandbox");
         driver = new ChromeDriver();
+        log.trace("Драйвер создан");
     }
 
     /**
      *
      */
     private static void initGeckoDriver() throws UnreachableBrowserException {
-        System.setProperty("webdriver.gecko.driver", System.getProperty("gecko.driver.path"));
+        System.setProperty("webdriver.gecko.driver", System.getProperty("gecko.windows.path"));
         driver = new FirefoxDriver();
     }
 
-    /**
-     *
-     * @throws UnreachableBrowserException
-     */
-    private static void initIEDriver() throws UnreachableBrowserException {
-        System.setProperty("webdriver.ie.driver", System.getProperty("ie.driver.path"));
-        driver = new InternetExplorerDriver();
-    }
 
     /**
      *
@@ -85,18 +75,17 @@ public class WebDriverManager {
             try {
                 switch (browser) {
                     case FIREFOX_browser: initGeckoDriver(); break;
-                    case IE11_browser: initIEDriver(); break;
                     case CHROME_browser:
                     default: initChromeDriver();
                 }
                 log.debug("Иницализирован драйвер браузера {}",browser);
-            } catch (UnreachableBrowserException e) {
+            } catch (Exception e) {
                 log.error("Ошибка инциализизации драйвера: {}", e.getMessage());
             }
             driver.manage().timeouts().implicitlyWait(Integer.parseInt(System.getProperty("implicit.wait")), TimeUnit.SECONDS);
-            if (Boolean.parseBoolean(System.getProperty("start-maximized"))) {
-                driver.manage().window().maximize();
-            }
+//            if (Boolean.parseBoolean(System.getProperty("start-maximized"))) {
+//                driver.manage().window().maximize();
+//            }
         }
         return driver;
     }
