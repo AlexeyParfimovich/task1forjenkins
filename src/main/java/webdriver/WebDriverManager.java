@@ -43,16 +43,26 @@ public class WebDriverManager {
      *
      */
     private static void initChromeDriver() throws UnreachableBrowserException {
+        ChromeOptions option = new ChromeOptions();
+
         if (platform.equals(LINUX_platform)) {
             System.setProperty("webdriver.chrome.driver", System.getProperty("chrome.linux.path"));
+
+            option.addArguments("--headless");
+            option.addArguments("--no-sandbox");
+            option.addArguments("--disable-gpu");
+            option.addArguments("--disable-extensions");
+            option.addArguments("--disable-dev-shm-usage");
+
             log.debug("Выбран драйвер браузера {} для {}",browser,platform);
         } else {
             System.setProperty("webdriver.chrome.driver", System.getProperty("chrome.windows.path"));
+
+            option.addArguments("--headless");
+            option.addArguments("--no-sandbox");
+
             log.debug("Выбран драйвер браузера {} для {}",browser,platform);
         }
-        ChromeOptions option = new ChromeOptions();
-        option.addArguments("--headless");
-        option.addArguments("--no-sandbox");
         driver = new ChromeDriver();
         log.trace("Драйвер создан");
     }
