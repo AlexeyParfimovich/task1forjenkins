@@ -20,6 +20,5 @@ public class Hooks {
     public void afterScenario(Scenario scenario) {
         log.info("Cценарий {} завершен", scenario.getName());
         WebDriverManager.quit();
-
     }
 }

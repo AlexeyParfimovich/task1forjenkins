@@ -28,21 +28,34 @@ public class WebDriverManager {
     public static WebDriverWait waiter;
     public static WebDriver driver;
 
+    private static final String WINDOWS_platform = "windows";
+    private static final String LINUX_platform = "linux";
+
     private static final String FIREFOX_browser = "firefox";
     private static final String CHROME_browser = "chrome";
     private static final String IE11_browser = "ie";
     private static final String browser;
+    private static final String platform;
     static {
         browser = System.getProperties().getProperty("webbrowser",CHROME_browser);
+        platform = System.getProperties().getProperty("testplatform",CHROME_browser);
     }
 
     /**
      *
      */
     private static void initChromeDriver() throws UnreachableBrowserException {
-        System.setProperty("webdriver.chrome.driver", System.getProperty("chrome.driver.path"));
-        //ChromeOptions option = new ChromeOptions();
-        //option.addArguments("--window-size=1360,768");
+        if (platform.equals(LINUX_platform)) {
+            System.setProperty("webdriver.chrome.driver", System.getProperty("chrome.linux.path"));
+            log.debug("Выбран драйвер браузера {} для {}",browser,platform);
+        } else {
+            System.setProperty("webdriver.chrome.driver", System.getProperty("chrome.windows.path"));
+            log.debug("Выбран драйвер браузера {} для {}",browser,platform);
+        }
+        //System.setProperty("webdriver.chrome.driver", System.getProperty("chrome.driver.path"));
+        ChromeOptions option = new ChromeOptions();
+        option.addArguments("--headless");
+        option.addArguments("--no-sandbox");
         driver = new ChromeDriver();
     }
 
