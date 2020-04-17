@@ -52,9 +52,9 @@ public class WebDriverManager {
             option.addArguments("--headless");
             option.addArguments("--no-sandbox");
             option.addArguments("--disable-gpu");
-            option.addArguments("--disable-extensions");
-            option.addArguments("--disable-dev-shm-usage");
-            option.addArguments("--remote-debugging-port=9222");
+//            option.addArguments("--disable-extensions");
+//            option.addArguments("--disable-dev-shm-usage");
+//            option.addArguments("--remote-debugging-port=9222");
             log.debug("Выбран драйвер браузера {} для {}",browser,platform);
         } else {
             System.setProperty("webdriver.chrome.driver", System.getProperty("chrome.windows.path"));
@@ -72,9 +72,9 @@ public class WebDriverManager {
 
         if (platform.equals(LINUX_platform)) {
             System.setProperty("webdriver.opera.driver", System.getProperty("opera.linux.path"));
-//            option.addArguments("--headless");
-//            option.addArguments("--no-sandbox");
-//            option.addArguments("--disable-gpu");
+            option.addArguments("--headless");
+            option.addArguments("--no-sandbox");
+            option.addArguments("--disable-gpu");
 //            option.addArguments("--disable-extensions");
 //            option.addArguments("--disable-dev-shm-usage");
 //            option.addArguments("--remote-debugging-port=9222");
@@ -95,6 +95,9 @@ public class WebDriverManager {
 
         if (platform.equals(LINUX_platform)) {
             System.setProperty("webdriver.gecko.driver", System.getProperty("gecko.linux.path"));
+            option.addArguments("--headless");
+            option.addArguments("--no-sandbox");
+            option.addArguments("--disable-gpu");
             log.debug("Выбран драйвер браузера {} для {}", browser, platform);
         } else {
             System.setProperty("webdriver.gecko.driver", System.getProperty("gecko.windows.path"));
