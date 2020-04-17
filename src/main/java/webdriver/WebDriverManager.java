@@ -52,7 +52,7 @@ public class WebDriverManager {
             option.addArguments("--headless");
             option.addArguments("--no-sandbox");
             option.addArguments("--disable-gpu");
-//            option.addArguments("--disable-extensions");
+            option.addArguments("--disable-extensions");
 //            option.addArguments("--disable-dev-shm-usage");
 //            option.addArguments("--remote-debugging-port=9222");
             log.debug("Выбран драйвер браузера {} для {}",browser,platform);
@@ -75,7 +75,7 @@ public class WebDriverManager {
             option.addArguments("--headless");
             option.addArguments("--no-sandbox");
             option.addArguments("--disable-gpu");
-//            option.addArguments("--disable-extensions");
+            option.addArguments("--disable-extensions");
 //            option.addArguments("--disable-dev-shm-usage");
 //            option.addArguments("--remote-debugging-port=9222");
             log.debug("Выбран драйвер браузера {} для {}",browser,platform);
@@ -98,6 +98,7 @@ public class WebDriverManager {
             option.addArguments("--headless");
             option.addArguments("--no-sandbox");
             option.addArguments("--disable-gpu");
+            option.addArguments("--disable-extensions");
             log.debug("Выбран драйвер браузера {} для {}", browser, platform);
         } else {
             System.setProperty("webdriver.gecko.driver", System.getProperty("gecko.windows.path"));
