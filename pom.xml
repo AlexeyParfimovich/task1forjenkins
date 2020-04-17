@@ -15,10 +15,10 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <selenium.test.webbrowser>chrome</selenium.test.webbrowser>
-        <selenium.test.jvmargs><![CDATA[-Dwebbrowser=${selenium.test.webbrowser}]]></selenium.test.jvmargs>
         <selenium.test.platform>windows</selenium.test.platform>
+        <selenium.test.webbrowser>chrome</selenium.test.webbrowser>
         <selenium.test.jvmargs><![CDATA[-Dtestplatform=${selenium.test.platform}]]></selenium.test.jvmargs>
+        <selenium.test.jvmargs><![CDATA[-Dwebbrowser=${selenium.test.webbrowser}]]></selenium.test.jvmargs>
     </properties>
 
     <dependencies>

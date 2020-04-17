@@ -49,18 +49,18 @@ public class WebDriverManager {
 
         if (platform.equals(LINUX_platform)) {
             System.setProperty("webdriver.chrome.driver", System.getProperty("chrome.linux.path"));
-//            option.addArguments("--headless");
-//            option.addArguments("--no-sandbox");
-//            option.addArguments("--disable-gpu");
-//            option.addArguments("--disable-extensions");
-//            option.addArguments("--disable-dev-shm-usage");
-//            option.addArguments("--remote-debugging-port=9222");
+            option.addArguments("--headless");
+            option.addArguments("--no-sandbox");
+            option.addArguments("--disable-gpu");
+            option.addArguments("--disable-extensions");
+            option.addArguments("--disable-dev-shm-usage");
+            option.addArguments("--remote-debugging-port=9222");
             log.debug("Выбран драйвер браузера {} для {}",browser,platform);
         } else {
             System.setProperty("webdriver.chrome.driver", System.getProperty("chrome.windows.path"));
             log.debug("Выбран драйвер браузера {} для {}",browser,platform);
         }
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(option);
         log.trace("Драйвер создан");
     }
 
@@ -83,7 +83,7 @@ public class WebDriverManager {
             System.setProperty("webdriver.opera.driver", System.getProperty("opera.windows.path"));
             log.debug("Выбран драйвер браузера {} для {}",browser,platform);
         }
-        driver = new OperaDriver();
+        driver = new OperaDriver(option);
         log.trace("Драйвер создан");
     }
 
@@ -100,7 +100,7 @@ public class WebDriverManager {
             System.setProperty("webdriver.gecko.driver", System.getProperty("gecko.windows.path"));
             log.debug("Выбран драйвер браузера {} для {}",browser,platform);
         }
-        driver = new FirefoxDriver();
+        driver = new FirefoxDriver(option);
         log.trace("Драйвер создан");
     }
 
@@ -123,9 +123,6 @@ public class WebDriverManager {
                 log.error("Ошибка инциализизации драйвера: {}", e.getMessage());
             }
             driver.manage().timeouts().implicitlyWait(Integer.parseInt(System.getProperty("implicit.wait")), TimeUnit.SECONDS);
-//            if (Boolean.parseBoolean(System.getProperty("start-maximized"))) {
-//                driver.manage().window().maximize();
-//            }
         }
         return driver;
     }
